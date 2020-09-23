@@ -18,9 +18,9 @@ To run:
 
     java -jar target/jetty-swagger-3.0.jar
 
-Hello World:
+Employee:
 
-    http://localhost:8080/api/hello/World
+    http://localhost:8080/api/employee/1
 
 Swagger:
 
