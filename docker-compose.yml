@@ -1,6 +1,6 @@
 version: '3.7'
 services:
-  restEasy-jetty:
+  resteasy-jetty:
     #image: venkatpakalon/RestEasy-jetty-3.0
     build:
       context: .
