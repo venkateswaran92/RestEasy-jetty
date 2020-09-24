@@ -1,0 +1,43 @@
+version: '3.7'
+services:
+  restEasy-jetty:
+    #image: venkatpakalon/RestEasy-jetty-3.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    restart: always
+    depends_on: # Start the depends_on first
+      - mysql 
+    environment:
+      RDS_HOSTNAME: mysql
+      RDS_PORT: 3306
+      RDS_DB_NAME: jettyServer
+      RDS_USERNAME: root-user
+      RDS_PASSWORD: dummy
+    networks:
+      - docker-restEasy-jetty-network
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: dummypassword 
+      MYSQL_USER: root-user
+      MYSQL_PASSWORD: dummy
+      MYSQL_DATABASE: jettyServer
+    volumes:
+      - restEasy-jetty-data-volume:/var/lib/mysql
+    networks:
+      - docker-restEasy-jetty-network  
+  
+# Volumes
+volumes:
+  restEasy-jetty-data-volume:
+
+networks:
+  docker-restEasy-jetty-network:
